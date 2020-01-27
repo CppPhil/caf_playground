@@ -13,11 +13,19 @@ set_target_properties(caf_io_lib PROPERTIES IMPORTED_LOCATION ${CAF_LIB_DIR}/lib
 add_library(caf_openssl_lib STATIC IMPORTED)
 set_target_properties(caf_openssl_lib PROPERTIES IMPORTED_LOCATION ${CAF_LIB_DIR}/libcaf_openssl.a)
 
+find_package(Threads REQUIRED)
+
 add_library(
     cafPlaygroundLibrary 
     STATIC 
     library/file.hpp 
     library/file.cpp
+)
+
+target_link_libraries(
+    cafPlaygroundLibrary
+    PUBLIC
+    Threads::Threads
 )
 
 target_link_libraries(
@@ -36,6 +44,12 @@ target_link_libraries(
     cafPlaygroundLibrary
     PUBLIC
     caf_openssl_lib
+)
+
+target_include_directories(
+    cafPlaygroundLibrary
+    PUBLIC
+    ${cafPlayground_SOURCE_DIR}/external/libcaf/build
 )
 
 target_include_directories(
