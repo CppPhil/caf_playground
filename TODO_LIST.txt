@@ -1,4 +1,3 @@
-Set up CAF
 Set up philslib
 Set up clang-format
 Set up Abseil
