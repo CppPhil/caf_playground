@@ -2,7 +2,7 @@ Set up CAF
 Set up philslib
 Set up clang-format
 Set up Abseil
-create tests
+create tests using CAF test framework
 ensure appropriate directories show up in git
 Make it so that it doesn't pass gnu++ flag
 Ensure correct optimization / warning flags are passed
