@@ -7,3 +7,6 @@
 [submodule "external/philslib"]
 	path = external/philslib
 	url = https://github.com/CppPhil/philslib.git
+[submodule "external/clang-format"]
+	path = external/clang-format
+	url = https://github.com/CppPhil/clang-format.git
