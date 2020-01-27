@@ -5,7 +5,6 @@ require 'etc'
 RUBY_DIR = __dir__
 ROOT_DIR = "#{RUBY_DIR}/../.."
 BUILD_DIR = "#{ROOT_DIR}/build"
-CAF_DIR = "#{ROOT_DIR}/external/libcaf"
 
 DEBUG_OPTION = 'Debug'
 RELEASE_OPTION = 'Release'
@@ -30,12 +29,6 @@ build_option = arguments
 Dir.mkdir BUILD_DIR unless File.directory? BUILD_DIR
 
 previous_directory = Dir.pwd
-
-Dir.chdir CAF_DIR
-system 'LDFLAGS=-lpthread ./configure --static-runtime --build-static --libs-only --with-gcc=g++'
-
-Dir.chdir 'build'
-system "make -j#{Etc.nprocessors} VERBOSE=1"
 
 Dir.chdir ROOT_DIR
 
