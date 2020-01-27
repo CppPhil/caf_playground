@@ -1,4 +1,3 @@
-Set up clang-format
 Set up Abseil
 create tests using CAF test framework
 ensure appropriate directories show up in git
