@@ -5,6 +5,7 @@ require 'etc'
 RUBY_DIR = __dir__
 ROOT_DIR = "#{RUBY_DIR}/../.."
 BUILD_DIR = "#{ROOT_DIR}/build"
+CAF_DIR = "#{ROOT_DIR}/external/libcaf"
 
 DEBUG_OPTION = 'Debug'
 RELEASE_OPTION = 'Release'
@@ -30,9 +31,13 @@ Dir.mkdir BUILD_DIR unless File.directory? BUILD_DIR
 
 previous_directory = Dir.pwd
 
+Dir.chdir CAF_DIR
+system './configure'
+system 'make'
+
 Dir.chdir ROOT_DIR
 
-system "cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=#{build_option} -G \"Unix Makefiles\" #{BUILD_DIR}"
+system "cmake -H. -Bbuild -DCMAKE_PREFIX_PATH=#{CAF_DIR} -DCMAKE_BUILD_TYPE=#{build_option} -G \"Unix Makefiles\" #{BUILD_DIR}"
 
 Dir.chdir BUILD_DIR
 

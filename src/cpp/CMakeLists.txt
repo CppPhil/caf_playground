@@ -8,7 +8,37 @@ add_library(
 target_link_libraries(
     cafPlaygroundLibrary
     PUBLIC
-    ${CAF_LIBRARIES}
+    ${CAF_CORE_LIB}
+)
+
+target_link_libraries(
+    cafPlaygroundLibrary
+    PUBLIC
+    ${CAF_IO_LIB}
+)
+
+target_link_libraries(
+    cafPlaygroundLibrary
+    PUBLIC
+    ${CAF_OPENSSL_LIB}
+)
+
+target_include_directories(
+    cafPlaygroundLibrary
+    PUBLIC
+    ${cafPlayground_SOURCE_DIR}/external/libcaf/libcaf_core
+)
+
+target_include_directories(
+    cafPlaygroundLibrary
+    PUBLIC
+    ${cafPlayground_SOURCE_DIR}/external/libcaf/libcaf_io
+)
+
+target_include_directories(
+    cafPlaygroundLibrary
+    PUBLIC
+    ${cafPlayground_SOURCE_DIR}/external/libcaf/libcaf_openssl
 )
 
 add_executable(
