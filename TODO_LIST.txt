@@ -6,5 +6,6 @@ Set up Abseil
 create tests
 ensure appropriate directories show up in git
 Try on Windows
+Add documentation generation
 Do the README.md
 Set up CI
