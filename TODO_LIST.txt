@@ -8,4 +8,5 @@ ensure appropriate directories show up in git
 Try on Windows
 Add documentation generation
 Do the README.md
+Do versioning
 Set up CI
