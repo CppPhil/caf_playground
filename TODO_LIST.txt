@@ -5,6 +5,7 @@ Set up clang-format
 Set up Abseil
 create tests
 ensure appropriate directories show up in git
+Ensure correct optimization / warning flags are passed
 Try on Windows
 Add documentation generation
 Do the README.md

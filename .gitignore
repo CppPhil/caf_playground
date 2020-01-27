@@ -341,3 +341,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/c,c++,ruby,linux,cmake,clion,batch,windows,rubymine
+
+# RubyMine project files
+src/ruby/.idea
