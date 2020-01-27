@@ -5,6 +5,12 @@ add_library(
     library/file.cpp
 )
 
+target_link_libraries(
+    cafPlaygroundLibrary
+    PUBLIC
+    ${CAF_LIBRARIES}
+)
+
 add_executable(
     cafPlaygroundApplication 
     application/main.cpp
