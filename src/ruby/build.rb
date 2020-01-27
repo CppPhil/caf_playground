@@ -10,18 +10,21 @@ DEBUG_OPTION = 'debug'
 RELEASE_OPTION = 'release'
 
 HELP = <<ENDHELP
+  Invalid command line arguments!
+  Possible options:
+
   #{DEBUG_OPTION}     Build in debug mode.
-  #{RELEASE_OPTION}   Builld in release mode.
+  #{RELEASE_OPTION}   Build in release mode.
 ENDHELP
 
 arguments = ARGV.join
 
-if !arguments.equal?(DEBUG_OPTION) && !arguments.equal?(RELEASE_OPTION)
+if arguments != DEBUG_OPTION && arguments != RELEASE_OPTION
   puts HELP
   exit
 end
 
-Dir.mkdir BUILD_DIR
+Dir.mkdir BUILD_DIR unless File.directory? BUILD_DIR
 
 previous_directory = Dir.pwd
 
