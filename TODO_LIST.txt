@@ -1,0 +1,10 @@
+Set up goto-ruby
+Set up CAF
+Set up philslib
+Set up clang-format
+Set up Abseil
+create tests
+ensure appropriate directories show up in git
+Try on Windows
+Do the README.md
+Set up CI
