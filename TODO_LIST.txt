@@ -1,8 +1,15 @@
-create tests using CAF test framework
-Ensure correct optimization / warning flags are passed
 Command to get rid of build dir entirely to force complete rebuild
+    -> Adjust the Ruby script to be able to do command line parsing properly
+
+Ensure correct optimization / warning flags are passed
+
+create tests using CAF test framework
+
 Add documentation generation
+
 Do the README.md
+
 Do versioning
+
 Set up CI
 
