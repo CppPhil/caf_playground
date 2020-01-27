@@ -39,7 +39,7 @@ system 'make'
 
 Dir.chdir ROOT_DIR
 
-system "cmake -H. -Bbuild -DCMAKE_PREFIX_PATH=#{CAF_DIR} -DCMAKE_BUILD_TYPE=#{build_option} -G \"Unix Makefiles\" #{BUILD_DIR}"
+system "cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=#{build_option} -G \"Unix Makefiles\" #{BUILD_DIR}"
 
 Dir.chdir BUILD_DIR
 
