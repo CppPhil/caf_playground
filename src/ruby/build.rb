@@ -6,8 +6,8 @@ RUBY_DIR = __dir__
 ROOT_DIR = "#{RUBY_DIR}/../.."
 BUILD_DIR = "#{ROOT_DIR}/build"
 
-DEBUG_OPTION = 'debug'
-RELEASE_OPTION = 'release'
+DEBUG_OPTION = 'Debug'
+RELEASE_OPTION = 'Release'
 
 HELP = <<ENDHELP
   Invalid command line arguments!
@@ -24,16 +24,18 @@ if arguments != DEBUG_OPTION && arguments != RELEASE_OPTION
   exit
 end
 
+build_option = arguments
+
 Dir.mkdir BUILD_DIR unless File.directory? BUILD_DIR
 
 previous_directory = Dir.pwd
 
 Dir.chdir ROOT_DIR
 
-system "cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=#{arguments} -G \"Unix Makefiles\" #{BUILD_DIR}"
+system "cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=#{build_option} -G \"Unix Makefiles\" #{BUILD_DIR}"
 
 Dir.chdir BUILD_DIR
 
-system "cmake --build #{BUILD_DIR} -- -j#{Etc.nprocessors} VERBOSE=1"
+system "cmake --build #{BUILD_DIR} --config #{build_option} -- -j#{Etc.nprocessors} VERBOSE=1"
 
 Dir.chdir previous_directory
