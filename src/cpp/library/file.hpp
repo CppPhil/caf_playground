@@ -5,4 +5,3 @@ namespace cp {
 extern "C" int print(const char* txt);
 } // namespace cp
 #endif // INCG_CP_FILE_HPP
-

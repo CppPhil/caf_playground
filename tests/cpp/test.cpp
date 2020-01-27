@@ -3,16 +3,13 @@
 
 namespace cp {
 namespace test {
-void runTest()
-{
-    std::puts("runTest()");
+void runTest() {
+  std::puts("runTest()");
 }
 } // namespace test
 } // namespace cp
 
-int main()
-{
-    std::puts("Test main here.");
-    cp::test::runTest();
+int main() {
+  std::puts("Test main here.");
+  cp::test::runTest();
 }
-

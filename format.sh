@@ -9,7 +9,7 @@ readonly DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 readonly CAF_DIR=$DIR/external/libcaf
 readonly SRC_DIR=$DIR/src/cpp
 readonly TEST_DIR=$DIR/tests/cpp
-readonly CLANG_FMT_DIR=$DIR/deps/clang-format
+readonly CLANG_FMT_DIR=$DIR/external/clang-format
 
 # files
 readonly FMT_SH=$CLANG_FMT_DIR/fmt.sh
