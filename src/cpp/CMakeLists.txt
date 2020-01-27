@@ -4,6 +4,7 @@ find_library(CAF_OPENSSL_LIB caf_openssl)
 
 find_package(Threads REQUIRED)
 
+### STATIC LIBRARY
 add_library(
     cafPlaygroundLibrary 
     STATIC 
@@ -59,6 +60,7 @@ target_include_directories(
     ${cafPlayground_SOURCE_DIR}/external/philslib/include
 )
 
+### APPLICATION
 add_executable(
     cafPlaygroundApplication 
     application/main.cpp
