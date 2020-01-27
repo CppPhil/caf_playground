@@ -5,7 +5,9 @@ Set up clang-format
 Set up Abseil
 create tests
 ensure appropriate directories show up in git
+Make it so that it doesn't pass gnu++ flag
 Ensure correct optimization / warning flags are passed
+Command to get rid of build dir entirely to force complete rebuild
 Try on Windows
 Add documentation generation
 Do the README.md

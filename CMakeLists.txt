@@ -5,7 +5,6 @@ project(cafPlayground)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 17)
 
-add_subdirectory(src/cpp/application)
-add_subdirectory(src/cpp/library)
+add_subdirectory(src/cpp)
 add_subdirectory(tests/cpp)
 

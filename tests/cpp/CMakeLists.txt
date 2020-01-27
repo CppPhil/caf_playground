@@ -1,12 +1,14 @@
-cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
+add_executable(cafPlaygroundTest test.hpp test.cpp)
 
-project(cafPlaygroundTests)
+target_include_directories(
+    cafPlaygroundTest 
+    PRIVATE 
+    ${cafPlaygroundLibrary_SOURCE_DIR}
+)
 
-set(TEST_NAME "Unittest")
-
-add_executable(${TEST_NAME} test.hpp test.cpp)
-
-target_include_directories(${TEST_NAME} PRIVATE cafPlaygroundLibrary_SOURCE_DIR)
-
-target_link_libraries(${TEST_NAME} PRIVATE cafPlaygroundLibrary)
+target_link_libraries(
+    cafPlaygroundTest 
+    PRIVATE 
+    cafPlaygroundLibrary
+)
 
