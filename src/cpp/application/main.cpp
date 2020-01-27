@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include <pl/string_view.hpp> // pl::string_view
 
 #include "caf/all.hpp"
 
@@ -18,8 +19,12 @@ behavior mirror(event_based_actor* self) {
     [=](const string& what) -> string {
       // prints "Hello World!" via aout (thread-safe cout wrapper)
       aout(self) << what << endl;
+      cp::print(what.c_str());
+      
+      const pl::string_view sv{what};
+      
       // reply "!dlroW olleH"
-      return string(what.rbegin(), what.rend());
+      return string(sv.rbegin(), sv.rend());
     }
   };
 }

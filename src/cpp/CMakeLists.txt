@@ -53,6 +53,12 @@ target_include_directories(
     ${cafPlayground_SOURCE_DIR}/external/libcaf/libcaf_openssl
 )
 
+target_include_directories(
+    cafPlaygroundLibrary
+    PUBLIC
+    ${cafPlayground_SOURCE_DIR}/external/philslib/include
+)
+
 add_executable(
     cafPlaygroundApplication 
     application/main.cpp
