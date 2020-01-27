@@ -1,0 +1,3 @@
+[submodule "external/goto-ruby"]
+	path = external/goto-ruby
+	url = https://github.com/CppPhil/goto-ruby.git

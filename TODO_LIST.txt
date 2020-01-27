@@ -1,4 +1,4 @@
-Set up goto-ruby
+Do the CMake basic stuff
 Set up CAF
 Set up philslib
 Set up clang-format
