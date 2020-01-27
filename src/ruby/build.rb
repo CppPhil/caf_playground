@@ -32,10 +32,10 @@ Dir.mkdir BUILD_DIR unless File.directory? BUILD_DIR
 previous_directory = Dir.pwd
 
 Dir.chdir CAF_DIR
-system './configure --build-static --libs-only'
+system './configure --build-static --libs-only --with-gcc=g++ --extra-flags=-lpthread'
 
 Dir.chdir 'build'
-system 'make'
+system "make -j#{Etc.nprocessors} VERBOSE=1"
 
 Dir.chdir ROOT_DIR
 
