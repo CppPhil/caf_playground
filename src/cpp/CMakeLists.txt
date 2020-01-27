@@ -1,3 +1,7 @@
+find_library(CAF_CORE_LIB caf_core)
+find_library(CAF_IO_LIB caf_io)
+find_library(CAF_OPENSSL_LIB caf_openssl)
+
 add_library(
     cafPlaygroundLibrary 
     STATIC 
@@ -8,19 +12,19 @@ add_library(
 target_link_libraries(
     cafPlaygroundLibrary
     PUBLIC
-    ${CAF_CORE_LIB}
+    "${CAF_CORE_LIB}"
 )
 
 target_link_libraries(
     cafPlaygroundLibrary
     PUBLIC
-    ${CAF_IO_LIB}
+    "${CAF_IO_LIB}"
 )
 
 target_link_libraries(
     cafPlaygroundLibrary
     PUBLIC
-    ${CAF_OPENSSL_LIB}
+    "${CAF_OPENSSL_LIB}"
 )
 
 target_include_directories(
