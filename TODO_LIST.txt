@@ -1,5 +1,4 @@
 create tests using CAF test framework
-Make it so that it doesn't pass gnu++ flag
 Ensure correct optimization / warning flags are passed
 Command to get rid of build dir entirely to force complete rebuild
 Add documentation generation
