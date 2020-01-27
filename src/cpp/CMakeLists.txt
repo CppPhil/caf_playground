@@ -1,3 +1,5 @@
+set(CAF_ROOT_DIR ${cafPlayground_SOURCE_DIR}/external/libcaf)
+
 include(${cafPlayground_SOURCE_DIR}/external/libcaf/cmake/FindCAF.cmake)
 
 find_package(CAF COMPONENTS core io openssl REQUIRED)
