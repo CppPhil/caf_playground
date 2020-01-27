@@ -1,8 +1,6 @@
-set(CAF_ROOT_DIR ${cafPlayground_SOURCE_DIR}/external/libcaf)
-
-include(${cafPlayground_SOURCE_DIR}/external/libcaf/cmake/FindCAF.cmake)
-
-find_package(CAF COMPONENTS core io openssl REQUIRED)
+find_library(CAF_CORE_LIB caf_core)
+find_library(CAF_IO_LIB caf_io)
+find_library(CAF_OPENSSL_LIB caf_openssl)
 
 find_package(Threads REQUIRED)
 
@@ -22,14 +20,37 @@ target_link_libraries(
 target_link_libraries(
     cafPlaygroundLibrary
     PUBLIC
-    ${CAF_LIBRARIES}
+    ${CAF_CORE_LIB}
 )
 
+target_link_libraries(
+    cafPlaygroundLibrary
+    PUBLIC
+    ${CAF_IO_LIB}
+)
+
+target_link_libraries(
+    cafPlaygroundLibrary
+    PUBLIC
+    ${CAF_OPENSSL_LIB}
+)
 
 target_include_directories(
     cafPlaygroundLibrary
     PUBLIC
-    ${CAF_INCLUDE_DIRS}
+    ${cafPlayground_SOURCE_DIR}/external/libcaf/libcaf_core
+)
+
+target_include_directories(
+    cafPlaygroundLibrary
+    PUBLIC
+    ${cafPlayground_SOURCE_DIR}/external/libcaf/libcaf_io
+)
+
+target_include_directories(
+    cafPlaygroundLibrary
+    PUBLIC
+    ${cafPlayground_SOURCE_DIR}/external/libcaf/libcaf_openssl
 )
 
 add_executable(
