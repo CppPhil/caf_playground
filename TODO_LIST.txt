@@ -1,6 +1,3 @@
-Command to get rid of build dir entirely to force complete rebuild
-    -> Adjust the Ruby script to be able to do command line parsing properly
-
 Ensure correct optimization / warning flags are passed
 
 create tests using CAF test framework

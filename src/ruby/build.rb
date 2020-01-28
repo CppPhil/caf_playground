@@ -20,12 +20,12 @@ end.parse!
 build_option = options[:build_type]
 
 if build_option.nil?
-  puts "build_type option wasn't set!"
+  printf "build_type option wasn't set!\n\n"
   system "ruby #{RUBY_DIR}/build.rb --help"
   exit 1
 end
 
-FileUtils.rm_rf BUILD_DIR if options[:rebuild]
+FileUtils.rm_rf BUILD_DIR if options[:rebuild] == 'true'
 
 Dir.mkdir BUILD_DIR unless File.directory? BUILD_DIR
 
