@@ -344,3 +344,6 @@ $RECYCLE.BIN/
 
 # RubyMine project files
 src/ruby/.idea
+
+# Doxygen generated documentation
+docs
