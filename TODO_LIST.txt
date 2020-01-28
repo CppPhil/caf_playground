@@ -13,3 +13,5 @@ Do versioning
 
 Set up CI
 
+Try on WSL
+
