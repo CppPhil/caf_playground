@@ -18,8 +18,12 @@ end
 options = {}
 begin
   OptionParser.new do |opt|
-    opt.on('-b', '--build_type {Debug|Release}', 'The build type to use') { |o| options[:build_type] = o }
-    opt.on('-r', '--rebuild {true|false}', 'Whether to force a rebuild or not') { |o| options[:rebuild] = o }
+    opt.on('-b', "--build_type {#{DEBUG_OPTION}|#{RELEASE_OPTION}}", 'The build type to use') do |o|
+      options[:build_type] = o
+    end
+    opt.on('-r', '--rebuild {true|false}', 'Whether to force a rebuild or not') do |o|
+      options[:rebuild] = o
+    end
   end.parse!
 rescue OptionParser::InvalidOption
   printf "Unknown option was given!\n\n"
@@ -29,8 +33,8 @@ end
 
 build_option = options[:build_type]
 
-if build_option.nil?
-  printf "build_type option wasn't set!\n\n"
+if (build_option != DEBUG_OPTION) && (build_option != RELEASE_OPTION)
+  printf "build_type option wasn't valid!\n\n"
   print_help
   exit 1
 end
