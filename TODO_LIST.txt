@@ -1,5 +1,3 @@
-Ensure correct optimization / warning flags are passed
-
 create tests using CAF test framework
 
 use CAF all throughout the application, library and tests
