@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'etc'
+require 'optparse'
 
 RUBY_DIR = __dir__
 ROOT_DIR = "#{RUBY_DIR}/../.."
@@ -9,22 +10,18 @@ BUILD_DIR = "#{ROOT_DIR}/build"
 DEBUG_OPTION = 'Debug'
 RELEASE_OPTION = 'Release'
 
-HELP = <<ENDHELP
-  Invalid command line arguments!
-  Possible options:
+options = {}
+OptionParser.new do |opt|
+  opt.on('-bt', '--build_type {Debug|Release}', 'The build type to use') { |o| options[:build_type] = o }
+end.parse!
 
-  #{DEBUG_OPTION}     Build in debug mode.
-  #{RELEASE_OPTION}   Build in release mode.
-ENDHELP
+build_option = options[:build_type]
 
-arguments = ARGV.join
-
-if arguments != DEBUG_OPTION && arguments != RELEASE_OPTION
-  puts HELP
-  exit
+if build_option.nil?
+  puts "build_type option wasn't set!"
+  system "ruby #{RUBY_DIR}/build.rb --help"
+  exit 1
 end
-
-build_option = arguments
 
 Dir.mkdir BUILD_DIR unless File.directory? BUILD_DIR
 
