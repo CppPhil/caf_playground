@@ -5,6 +5,10 @@ Ensure correct optimization / warning flags are passed
 
 create tests using CAF test framework
 
+use CAF all throughout the application, library and tests
+    -> If it doesn't work for no reason at all
+        -> Try to turn the library into a shared (dynamically linked) library 
+
 Add documentation generation
 
 Do the README.md
