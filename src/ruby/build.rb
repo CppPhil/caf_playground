@@ -11,17 +11,27 @@ BUILD_DIR = "#{ROOT_DIR}/build"
 DEBUG_OPTION = 'Debug'
 RELEASE_OPTION = 'Release'
 
+def print_help()
+  system "ruby #{RUBY_DIR}/build.rb --help"
+end
+
 options = {}
-OptionParser.new do |opt|
-  opt.on('-bt', '--build_type {Debug|Release}', 'The build type to use') { |o| options[:build_type] = o }
-  opt.on('-rb', '--rebuild {true|false}', 'Whether to force a rebuild or not') { |o| options[:rebuild] = o }
-end.parse!
+begin
+  OptionParser.new do |opt|
+    opt.on('-b', '--build_type {Debug|Release}', 'The build type to use') { |o| options[:build_type] = o }
+    opt.on('-r', '--rebuild {true|false}', 'Whether to force a rebuild or not') { |o| options[:rebuild] = o }
+  end.parse!
+rescue OptionParser::InvalidOption
+  printf "Unknown option was given!\n\n"
+  print_help
+  exit 1
+end
 
 build_option = options[:build_type]
 
 if build_option.nil?
   printf "build_type option wasn't set!\n\n"
-  system "ruby #{RUBY_DIR}/build.rb --help"
+  print_help
   exit 1
 end
 
