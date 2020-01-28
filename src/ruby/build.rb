@@ -11,7 +11,7 @@ BUILD_DIR = "#{ROOT_DIR}/build"
 DEBUG_OPTION = 'Debug'
 RELEASE_OPTION = 'Release'
 
-def print_help()
+def print_help
   system "ruby #{RUBY_DIR}/build.rb --help"
 end
 
