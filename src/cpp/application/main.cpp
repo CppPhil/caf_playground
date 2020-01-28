@@ -10,7 +10,6 @@
 #include "caf/all.hpp"
 #pragma GCC diagnostic pop
 
-
 caf::behavior mirror(caf::event_based_actor* self) {
   // return the (initial) actor behavior
   return {// a handler for messages containing a single string
