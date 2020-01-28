@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'etc'
+require 'fileutils'
 require 'optparse'
 
 RUBY_DIR = __dir__
@@ -13,6 +14,7 @@ RELEASE_OPTION = 'Release'
 options = {}
 OptionParser.new do |opt|
   opt.on('-bt', '--build_type {Debug|Release}', 'The build type to use') { |o| options[:build_type] = o }
+  opt.on('-rb', '--rebuild {true|false}', 'Whether to force a rebuild or not') { |o| options[:rebuild] = o }
 end.parse!
 
 build_option = options[:build_type]
@@ -22,6 +24,8 @@ if build_option.nil?
   system "ruby #{RUBY_DIR}/build.rb --help"
   exit 1
 end
+
+FileUtils.rm_rf BUILD_DIR if options[:rebuild]
 
 Dir.mkdir BUILD_DIR unless File.directory? BUILD_DIR
 
