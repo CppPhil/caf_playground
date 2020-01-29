@@ -11,6 +11,7 @@ set(
     "library/file.hpp"
     "library/hello_world.hpp"
     "library/mirror.hpp"
+    "library/testee.hpp"
 )
 
 set(
@@ -18,6 +19,7 @@ set(
     "library/file.cpp"
     "library/hello_world.cpp"
     "library/mirror.cpp"
+    "library/testee.cpp"
 )
 
 add_library(

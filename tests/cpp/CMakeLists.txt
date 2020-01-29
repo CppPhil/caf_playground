@@ -1,6 +1,7 @@
 set(
     TEST_SOURCES
-    "test.cpp"   
+    "test.cpp"
+    "test2.cpp" 
 )
 
 add_executable(
