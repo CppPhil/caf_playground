@@ -4,7 +4,7 @@ find_library(CAF_OPENSSL_LIB caf_openssl)
 
 find_package(Threads REQUIRED)
 
-### STATIC LIBRARY
+### OBJECT LIBRARY
 set(
     LIB_HEADERS
     "library/caf.hpp"
@@ -22,7 +22,7 @@ set(
 
 add_library(
     cafPlaygroundLibrary 
-    STATIC 
+    OBJECT
     ${LIB_HEADERS}
     ${LIB_SOURCES}
 )
@@ -71,7 +71,7 @@ target_include_directories(
 
 target_include_directories(
     cafPlaygroundLibrary
-    PUBLIC
+    PRIVATE
     ${cafPlayground_SOURCE_DIR}/external/philslib/include
 )
 
