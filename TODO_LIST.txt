@@ -1,5 +1,3 @@
-Run CAF tests
-
 Do versioning
 
 Gather CAF resources
