@@ -1,6 +1,7 @@
 Do versioning
 
-Gather CAF resources
+Read relevant Schmidt Unterlagen
+Read manual.pdf
 
 Set up CI
 
