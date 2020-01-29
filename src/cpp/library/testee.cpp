@@ -36,4 +36,3 @@ behavior testee(stateful_actor<testee_state, raw_event_based_actor>* self,
     [=](exit_msg& x) { self->quit(x.reason); },
   };
 }
-

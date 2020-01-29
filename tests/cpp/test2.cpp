@@ -1,17 +1,13 @@
 #define CAF_SUITE actor_clock
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wduplicated-branches"
-#pragma GCC diagnostic ignored "-Wshadow"
-#pragma GCC diagnostic ignored "-Wredundant-decls"
-#include "caf/test/dsl.hpp"
-#include "caf/all.hpp"
-#include "caf/detail/test_actor_clock.hpp"
-#include "caf/raw_event_based_actor.hpp"
-#pragma GCC diagnostic pop
+#include <CAF_INCLUDES_BEGIN>
+#include <CAF_INCLUDES_END>
+#include <caf/all.hpp>
+#include <caf/detail/test_actor_clock.hpp>
+#include <caf/raw_event_based_actor.hpp>
+#include <caf/test/dsl.hpp>
 
 #include <chrono>
 #include <memory>
-
 
 #include <testee.hpp>
 

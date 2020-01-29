@@ -1,11 +1,8 @@
 #define CAF_SUITE test
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wduplicated-branches"
-#pragma GCC diagnostic ignored "-Wshadow"
-#pragma GCC diagnostic ignored "-Wredundant-decls"
-#include <caf/test/unit_test.hpp>
+#include <CAF_INCLUDES_BEGIN>
+#include <CAF_INCLUDES_END>
 #include <caf/optional.hpp>
-#pragma GCC diagnostic pop
+#include <caf/test/unit_test.hpp>
 
 using namespace caf;
 
@@ -69,8 +66,7 @@ CAF_TEST(custom_type_engaged) {
   optional<qwertz> x = obj;
   CAF_CHECK(x != none);
   CAF_CHECK(obj == x);
-  CAF_CHECK(x == obj );
+  CAF_CHECK(x == obj);
   CAF_CHECK(obj == *x);
   CAF_CHECK(*x == obj);
 }
-

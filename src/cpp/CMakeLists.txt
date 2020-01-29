@@ -7,7 +7,6 @@ find_package(Threads REQUIRED)
 ### OBJECT LIBRARY
 set(
     LIB_HEADERS
-    "library/caf.hpp"
     "library/file.hpp"
     "library/hello_world.hpp"
     "library/mirror.hpp"
