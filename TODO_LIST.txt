@@ -5,6 +5,8 @@ use CAF all throughout the application, library and tests
         -> Try using an object library
             -> If that doesn't work: Try to turn the library into a shared (dynamically linked) library 
 
+Run CAF tests
+
 Do versioning
 
 Gather CAF resources
