@@ -1,6 +1,4 @@
 #define CAF_SUITE test
-#include <CAF_INCLUDES_BEGIN>
-#include <CAF_INCLUDES_END>
 #include <caf/optional.hpp>
 #include <caf/test/unit_test.hpp>
 

@@ -1,7 +1,5 @@
 #ifndef INCG_CP_TESTEE_HPP
 #define INCG_CP_TESTEE_HPP
-#include "CAF_INCLUDES_BEGIN"
-#include "CAF_INCLUDES_END"
 #include <caf/all.hpp>
 #include <caf/raw_event_based_actor.hpp>
 

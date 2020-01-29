@@ -1,5 +1,3 @@
-#include <CAF_INCLUDES_BEGIN>
-#include <CAF_INCLUDES_END>
 #include <caf/all.hpp>
 #include <hello_world.hpp>
 #include <mirror.hpp>

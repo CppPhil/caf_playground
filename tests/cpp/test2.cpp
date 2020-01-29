@@ -1,6 +1,4 @@
 #define CAF_SUITE actor_clock
-#include <CAF_INCLUDES_BEGIN>
-#include <CAF_INCLUDES_END>
 #include <caf/all.hpp>
 #include <caf/detail/test_actor_clock.hpp>
 #include <caf/raw_event_based_actor.hpp>

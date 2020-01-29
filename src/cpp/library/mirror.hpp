@@ -1,7 +1,5 @@
 #ifndef INCG_CP_MIRROR_HPP
 #define INCG_CP_MIRROR_HPP
-#include "CAF_INCLUDES_BEGIN"
-#include "CAF_INCLUDES_END"
 #include <caf/all.hpp>
 
 namespace cp {
