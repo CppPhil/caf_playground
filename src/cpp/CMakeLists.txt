@@ -5,11 +5,26 @@ find_library(CAF_OPENSSL_LIB caf_openssl)
 find_package(Threads REQUIRED)
 
 ### STATIC LIBRARY
+set(
+    LIB_HEADERS
+    "library/caf.hpp"
+    "library/file.hpp"
+    "library/hello_world.hpp"
+    "library/mirror.hpp"
+)
+
+set(
+    LIB_SOURCES
+    "library/file.cpp"
+    "library/hello_world.cpp"
+    "library/mirror.cpp"
+)
+
 add_library(
     cafPlaygroundLibrary 
     STATIC 
-    library/file.hpp 
-    library/file.cpp
+    ${LIB_HEADERS}
+    ${LIB_SOURCES}
 )
 
 target_link_libraries(
