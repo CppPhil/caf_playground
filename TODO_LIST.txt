@@ -2,7 +2,8 @@ create tests using CAF test framework
 
 use CAF all throughout the application, library and tests
     -> If it doesn't work for no reason at all
-        -> Try to turn the library into a shared (dynamically linked) library 
+        -> Try using an object library
+            -> If that doesn't work: Try to turn the library into a shared (dynamically linked) library 
 
 Do the README.md
 
