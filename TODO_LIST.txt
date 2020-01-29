@@ -8,6 +8,8 @@ Do the README.md
 
 Do versioning
 
+Gather CAF resources
+
 Set up CI
 
 Try on WSL
