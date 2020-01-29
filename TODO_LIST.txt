@@ -1,5 +1,3 @@
-create tests using CAF test framework
-
 Run CAF tests
 
 Do versioning
