@@ -1,0 +1,10 @@
+#include <int_types.hpp>      // u32
+#include <pl/string_view.hpp> // pl::string_view
+
+namespace cp {
+constexpr pl::string_view version{"@cafPlayground_VERSION@"};
+constexpr u32 version_major{@cafPlayground_VERSION_MAJOR@};
+constexpr u32 version_minor{@cafPlayground_VERSION_MINOR@ + 0};
+constexpr u32 version_patch{@cafPlayground_VERSION_PATCH@ + 0};
+constexpr u32 version_tweak{@cafPlayground_VERSION_TWEAK@ + 0};
+} // namespace cp

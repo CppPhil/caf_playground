@@ -18,12 +18,6 @@ target_include_directories(
     ${cafPlayground_SOURCE_DIR}/external/libcaf/libcaf_test
 )
 
-target_include_directories(
-    cafPlaygroundTest 
-    PRIVATE 
-    ${cafPlayground_SOURCE_DIR}/src/cpp/library
-)
-
 target_link_libraries(
     cafPlaygroundTest 
     PRIVATE 

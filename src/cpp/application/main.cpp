@@ -1,8 +1,11 @@
 #include <caf/all.hpp>
+#include <file.hpp>
 #include <hello_world.hpp>
 #include <mirror.hpp>
 
 void caf_main(caf::actor_system& system) {
+  cp::print_version_information();
+
   // create a new actor that calls 'mirror()'
   auto mirror_actor = system.spawn(&cp::mirror);
   // create another actor that calls 'hello_world(mirror_actor)';

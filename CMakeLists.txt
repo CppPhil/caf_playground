@@ -10,6 +10,8 @@ set(CMAKE_CXX_STANDARD          17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS        OFF)
 
+configure_file(src/cmake/version.hpp.in version.hpp @ONLY)
+
 add_subdirectory(src/cpp)
 add_subdirectory(tests/cpp)
 

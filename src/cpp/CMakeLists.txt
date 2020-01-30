@@ -11,6 +11,7 @@ set(
     "library/hello_world.hpp"
     "library/mirror.hpp"
     "library/testee.hpp"
+    "library/int_types.hpp"
 )
 
 set(
@@ -72,6 +73,18 @@ target_include_directories(
 
 target_include_directories(
     cafPlaygroundLibrary
+    PUBLIC
+    library
+)
+
+target_include_directories(
+    cafPlaygroundLibrary
+    PUBLIC
+    ${cafPlayground_BINARY_DIR}
+)
+
+target_include_directories(
+    cafPlaygroundLibrary
     PRIVATE
     ${cafPlayground_SOURCE_DIR}/external/philslib/include
 )
@@ -82,15 +95,8 @@ add_executable(
     application/main.cpp
 )
 
-target_include_directories(
-    cafPlaygroundApplication
-    PRIVATE
-    library
-)
-
 target_link_libraries(
     cafPlaygroundApplication
     PRIVATE
     cafPlaygroundLibrary
 )
-
