@@ -11,12 +11,13 @@ extern "C" int print(const char* txt) {
 }
 
 int print_version_information() {
-  return std::printf("VERSION = %s\n"
-                     "MAJOR   = %" PRIu32 "\n"
-                     "MINOR   = %" PRIu32 "\n"
-                     "PATCH   = %" PRIu32 "\n"
-                     "TWEAK   = %" PRIu32 "\n",
+  return std::printf("VERSION  = %s\n"
+                     "MAJOR    = %" PRIu32 "\n"
+                     "MINOR    = %" PRIu32 "\n"
+                     "PATCH    = %" PRIu32 "\n"
+                     "TWEAK    = %" PRIu32 "\n"
+                     "GIT HASH = %s\n",
                      version.data(), version_major, version_minor,
-                     version_patch, version_tweak);
+                     version_patch, version_tweak, git_hash.data());
 }
 } // namespace cp

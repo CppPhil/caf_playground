@@ -7,4 +7,6 @@ constexpr u32 version_major{@cafPlayground_VERSION_MAJOR@};
 constexpr u32 version_minor{@cafPlayground_VERSION_MINOR@ + 0};
 constexpr u32 version_patch{@cafPlayground_VERSION_PATCH@ + 0};
 constexpr u32 version_tweak{@cafPlayground_VERSION_TWEAK@ + 0};
+
+constexpr pl::string_view git_hash{"@cafPlayground_GIT_HASH@"};
 } // namespace cp

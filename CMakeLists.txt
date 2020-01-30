@@ -10,6 +10,17 @@ set(CMAKE_CXX_STANDARD          17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS        OFF)
 
+find_package(Git REQUIRED)
+execute_process(
+    COMMAND ${GIT_EXECUTABLE} rev-parse HEAD
+    RESULT_VARIABLE result
+    OUTPUT_VARIABLE cafPlayground_GIT_HASH
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+if(result)
+    message(FATAL_ERROR "Failed to get git hash: ${result}")
+endif()
+
 configure_file(src/cmake/version.hpp.in version.hpp @ONLY)
 
 add_subdirectory(src/cpp)
