@@ -9,7 +9,7 @@ add_executable(
     "caf-test.cpp"
     "${cafPlayground_SOURCE_DIR}/external/libcaf/libcaf_test/caf/test/unit_test.hpp"
     "${cafPlayground_SOURCE_DIR}/external/libcaf/libcaf_test/caf/test/unit_test_impl.hpp"
-   ${TEST_SOURCES}    
+    ${TEST_SOURCES}    
 )
 
 target_include_directories(
