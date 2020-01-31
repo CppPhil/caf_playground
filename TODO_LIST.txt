@@ -1,5 +1,8 @@
 Read relevant Schmidt Unterlagen
 Read manual.pdf
+Read online documentation etc.
+See examples
+Do Praktikumsaufgabe
 
 Set up CI
 
