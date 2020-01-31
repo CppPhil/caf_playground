@@ -12,6 +12,7 @@ set(
     "library/mirror.hpp"
     "library/testee.hpp"
     "library/int_types.hpp"
+    "library/typed_calculator.hpp"
 )
 
 set(
