@@ -1,4 +1,6 @@
 Read manual.pdf
+ -> 5.7 Stateful Actors
+
 Read online documentation etc.
 See examples
 Do Praktikumsaufgabe
