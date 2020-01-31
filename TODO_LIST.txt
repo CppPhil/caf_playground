@@ -4,6 +4,7 @@ Read manual.pdf
 Read online documentation etc.
 See examples
 Do Praktikumsaufgabe
+Implement distributed chat application
 
 Set up CI
 
