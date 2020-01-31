@@ -347,3 +347,7 @@ src/ruby/.idea
 
 # Doxygen generated documentation
 docs
+
+# CLion project files
+.idea
+
