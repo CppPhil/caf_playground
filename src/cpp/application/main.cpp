@@ -40,5 +40,15 @@ void caf_main(caf::actor_system& system) {
              });
 }
 
+struct foo {
+  std::vector<int> a;
+  int b;
+};
+
+template <typename Inspector>
+typename Inspector::result_type inspect(Inspector& f, foo& x) {
+  return f(caf::meta::type_name("foo"), x.a, x.b);
+}
+
 // creates a main function for us that calls our caf_main
 CAF_MAIN()
