@@ -17,6 +17,7 @@ set(
     "library/composable_behavior.hpp"
     "library/dictionary.hpp"
     "library/custom_error_handler.hpp"
+    "library/delegation.hpp"
 )
 
 set(
@@ -29,6 +30,7 @@ set(
     "library/composable_behavior.cpp"
     "library/dictionary.cpp"
     "library/custom_error_handler.cpp"
+    "library/delegation.cpp"
 )
 
 add_library(

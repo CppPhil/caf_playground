@@ -3,6 +3,7 @@
 #include <cell.hpp>
 #include <composable_behavior.hpp>
 #include <custom_error_handler.hpp>
+#include <delegation.hpp>
 #include <dictionary.hpp>
 #include <file.hpp>
 #include <hello_world.hpp>
@@ -108,6 +109,9 @@ void caf_main(caf::actor_system& system) {
         caf::aout(self) << "*** cannot compute " << x << " / " << y << " => "
                         << err.code() << std::endl;
       });
+
+  // Delegation example
+  cp::launch_delegation_example(system);
 }
 
 struct foo {
