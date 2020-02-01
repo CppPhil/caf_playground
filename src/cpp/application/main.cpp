@@ -2,6 +2,7 @@
 #include <caf/io/all.hpp>
 #include <cell.hpp>
 #include <composable_behavior.hpp>
+#include <dictionary.hpp>
 #include <file.hpp>
 #include <hello_world.hpp>
 #include <mirror.hpp>
@@ -38,6 +39,11 @@ void caf_main(caf::actor_system& system) {
   auto f = caf::make_function_view(system.spawn<cp::calculator_bhvr>());
   caf::aout(self) << "10 + 20 = " << f(caf::add_atom_v, 10, 20) << "\n"
                   << "7 * 9 = " << f(caf::mul_atom_v, 7, 9) << std::endl;
+
+  auto dict_functor
+    = caf::make_function_view(system.spawn<cp::dict_behavior>());
+  dict_functor(caf::put_atom_v, "#1", "Hello CAF!");
+  caf::aout(self) << "get: " << dict_functor(caf::get_atom_v, "#1");
 }
 
 struct foo {

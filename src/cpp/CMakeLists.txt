@@ -15,6 +15,7 @@ set(
     "library/typed_calculator.hpp"
     "library/cell.hpp"
     "library/composable_behavior.hpp"
+    "library/dictionary.hpp"
 )
 
 set(
@@ -25,6 +26,7 @@ set(
     "library/testee.cpp"
     "library/cell.cpp"
     "library/composable_behavior.cpp"
+    "library/dictionary.cpp"
 )
 
 add_library(
