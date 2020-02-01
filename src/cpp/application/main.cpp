@@ -1,6 +1,7 @@
 #include <caf/all.hpp>
 #include <caf/io/all.hpp>
 #include <cell.hpp>
+#include <composable_behavior.hpp>
 #include <file.hpp>
 #include <hello_world.hpp>
 #include <mirror.hpp>
@@ -33,6 +34,10 @@ void caf_main(caf::actor_system& system) {
 
   auto cell = system.spawn(&cp::type_checked_cell);
   auto cell_buddy = system.spawn(&typed_cell_buddy_actor_fun, cell);
+
+  auto f = caf::make_function_view(system.spawn<cp::calculator_bhvr>());
+  caf::aout(self) << "10 + 20 = " << f(caf::add_atom_v, 10, 20) << "\n"
+                  << "7 * 9 = " << f(caf::mul_atom_v, 7, 9) << std::endl;
 }
 
 struct foo {

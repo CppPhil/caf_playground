@@ -14,6 +14,7 @@ set(
     "library/int_types.hpp"
     "library/typed_calculator.hpp"
     "library/cell.hpp"
+    "library/composable_behavior.hpp"
 )
 
 set(
@@ -23,6 +24,7 @@ set(
     "library/mirror.cpp"
     "library/testee.cpp"
     "library/cell.cpp"
+    "library/composable_behavior.cpp"
 )
 
 add_library(
