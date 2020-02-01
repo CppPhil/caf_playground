@@ -62,7 +62,17 @@ void blocking_testee(caf::blocking_actor* self, std::vector<cp::cell> cells) {
   }
 }
 
-void caf_main(caf::actor_system& system) {
+class config : public caf::actor_system_config {
+public:
+  config() {
+    auto renderer = [](uint8_t x, const caf::message&) {
+      return to_string(static_cast<cp::math_error>(x));
+    };
+    add_error_category(caf::error_category<cp::math_error>::value, renderer);
+  }
+};
+
+void caf_main(caf::actor_system& system, [[maybe_unused]] const config& cfg) {
   cp::print_version_information();
 
   auto mirror_actor = system.spawn(&cp::mirror);
@@ -106,9 +116,9 @@ void caf_main(caf::actor_system& system) {
       [&self, x, y](double z) {
         caf::aout(self) << x << " / " << y << " = " << z << std::endl;
       },
-      [&self, x, y](const caf::error& err) {
+      [&self, &system, x, y](const caf::error& err) {
         caf::aout(self) << "*** cannot compute " << x << " / " << y << " => "
-                        << err.context() << std::endl;
+                        << system.render(err) << std::endl;
       });
 
   // Delegation example
