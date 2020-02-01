@@ -18,6 +18,7 @@ set(
     "library/dictionary.hpp"
     "library/custom_error_handler.hpp"
     "library/delegation.hpp"
+    "library/response_promise.hpp"
 )
 
 set(
@@ -31,6 +32,7 @@ set(
     "library/dictionary.cpp"
     "library/custom_error_handler.cpp"
     "library/delegation.cpp"
+    "library/response_promise.cpp"
 )
 
 add_library(

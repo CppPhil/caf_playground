@@ -9,6 +9,7 @@
 #include <hello_world.hpp>
 #include <mirror.hpp>
 #include <pl/current_function.hpp>
+#include <response_promise.hpp>
 #include <typed_calculator.hpp>
 
 void typed_cell_buddy_actor_fun(caf::event_based_actor* self,
@@ -112,6 +113,9 @@ void caf_main(caf::actor_system& system) {
 
   // Delegation example
   cp::launch_delegation_example(system);
+
+  // Response promise example
+  cp::launch_response_promise_example(system);
 }
 
 struct foo {
