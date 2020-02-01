@@ -88,7 +88,7 @@ target_include_directories(
 
 target_include_directories(
     cafPlaygroundLibrary
-    PRIVATE
+    PUBLIC
     ${cafPlayground_SOURCE_DIR}/external/philslib/include
 )
 
