@@ -1,5 +1,5 @@
 Read manual.pdf
- -> 5.7 Stateful Actors
+ -> 5.8 Actors from Composable Behaviors
 
 Read online documentation etc.
 See examples
