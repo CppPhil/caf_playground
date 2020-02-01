@@ -18,11 +18,19 @@ void typed_cell_buddy_actor_fun(caf::event_based_actor* self,
   });
 }
 
+// Utility function to print an exit message with custom name.
+void print_on_exit(const caf::actor& hdl, const std::string& name) {
+  hdl->attach_functor([name](const caf::error& reason) {
+    std::cout << name << " exited: " << caf::to_string(reason) << std::endl;
+  });
+}
+
 void caf_main(caf::actor_system& system) {
   cp::print_version_information();
 
   auto mirror_actor = system.spawn(&cp::mirror);
   system.spawn(&cp::hello_world, mirror_actor);
+  print_on_exit(mirror_actor, "MIRROR ACTOR");
 
   auto typed_calculator_actor = system.spawn<cp::typed_calculator>();
   caf::scoped_actor self{system};
