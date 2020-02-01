@@ -108,7 +108,7 @@ void caf_main(caf::actor_system& system) {
       },
       [&self, x, y](const caf::error& err) {
         caf::aout(self) << "*** cannot compute " << x << " / " << y << " => "
-                        << err.code() << std::endl;
+                        << err.context() << std::endl;
       });
 
   // Delegation example
