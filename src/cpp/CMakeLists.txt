@@ -16,6 +16,7 @@ set(
     "library/cell.hpp"
     "library/composable_behavior.hpp"
     "library/dictionary.hpp"
+    "library/custom_error_handler.hpp"
 )
 
 set(
@@ -27,6 +28,7 @@ set(
     "library/cell.cpp"
     "library/composable_behavior.cpp"
     "library/dictionary.cpp"
+    "library/custom_error_handler.cpp"
 )
 
 add_library(

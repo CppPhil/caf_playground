@@ -2,6 +2,7 @@
 #include <caf/io/all.hpp>
 #include <cell.hpp>
 #include <composable_behavior.hpp>
+#include <custom_error_handler.hpp>
 #include <dictionary.hpp>
 #include <file.hpp>
 #include <hello_world.hpp>
@@ -87,6 +88,7 @@ void caf_main(caf::actor_system& system) {
   dict_functor(caf::put_atom_v, "#1", "Hello CAF!");
   caf::aout(self) << "get: " << dict_functor(caf::get_atom_v, "#1");
 
+  // Cells example
   std::vector<cp::cell> cells{};
   for (int i{0}; i < 5; ++i) {
     cells.push_back(system.spawn(&cp::type_checked_cell, i * i));
@@ -94,6 +96,18 @@ void caf_main(caf::actor_system& system) {
   system.spawn(&waiting_testee, cells);     // LIFO order
   system.spawn(&multiplexed_testee, cells); // arbitrary order
   blocking_testee(self.ptr(), cells);       // FIFO order
+
+  auto div = system.spawn(&cp::divider_impl);
+  const double x{7.0}, y{0.0};
+  self->request(div, std::chrono::seconds{10}, caf::div_atom_v, x, y)
+    .receive(
+      [&self, x, y](double z) {
+        caf::aout(self) << x << " / " << y << " = " << z << std::endl;
+      },
+      [&self, x, y](const caf::error& err) {
+        caf::aout(self) << "*** cannot compute " << x << " / " << y << " => "
+                        << err.code() << std::endl;
+      });
 }
 
 struct foo {
