@@ -1,5 +1,6 @@
 #include <caf/all.hpp>
 #include <caf/io/all.hpp>
+#include <cell.hpp>
 #include <file.hpp>
 #include <hello_world.hpp>
 #include <mirror.hpp>
@@ -16,6 +17,15 @@ void caf_main(caf::actor_system& system) {
   self
     ->request(typed_calculator_actor, caf::infinite, caf::addition_atom{}, 1, 2)
     .receive([](int z) { std::cout << "1+2=" << z << '\n'; },
+             [&system](caf::error& err) {
+               std::cout << "Error: " << system.render(err) << '\n';
+             });
+
+  auto cell = system.spawn(&cp::type_checked_cell);
+  self->request(cell, caf::infinite, caf::put_atom{}, 50);
+
+  self->request(cell, caf::infinite, caf::get_atom{})
+    .receive([](int result) { std::cout << "Here's: " << result << '\n'; },
              [&system](caf::error& err) {
                std::cout << "Error: " << system.render(err) << '\n';
              });

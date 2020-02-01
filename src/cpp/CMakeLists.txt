@@ -13,6 +13,7 @@ set(
     "library/testee.hpp"
     "library/int_types.hpp"
     "library/typed_calculator.hpp"
+    "library/cell.hpp"
 )
 
 set(
@@ -21,6 +22,7 @@ set(
     "library/hello_world.cpp"
     "library/mirror.cpp"
     "library/testee.cpp"
+    "library/cell.cpp"
 )
 
 add_library(
