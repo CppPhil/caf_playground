@@ -21,8 +21,42 @@ void typed_cell_buddy_actor_fun(caf::event_based_actor* self,
 // Utility function to print an exit message with custom name.
 void print_on_exit(const caf::actor& hdl, const std::string& name) {
   hdl->attach_functor([name](const caf::error& reason) {
-    std::cout << name << " exited: " << caf::to_string(reason) << std::endl;
+    std::printf("%s exited: %s\n", name.c_str(),
+                caf::to_string(reason).c_str());
   });
+}
+
+void waiting_testee(caf::event_based_actor* self, std::vector<cp::cell> cells) {
+  for (auto& x : cells) {
+    self->request(x, std::chrono::seconds(1), caf::get_atom_v)
+      .await([self, x](int y) {
+        caf::aout(self) << "cell #" << x.id() << " -> " << y << std::endl;
+      });
+  }
+}
+
+void multiplexed_testee(caf::event_based_actor* self,
+                        std::vector<cp::cell> cells) {
+  for (auto& x : cells) {
+    self->request(x, std::chrono::seconds(1), caf::get_atom_v)
+      .then([self, x](int y) {
+        caf::aout(self) << "cell #" << x.id() << " -> " << y << std::endl;
+      });
+  }
+}
+
+void blocking_testee(caf::blocking_actor* self, std::vector<cp::cell> cells) {
+  for (auto& x : cells) {
+    self->request(x, std::chrono::seconds(1), caf::get_atom_v)
+      .receive(
+        [&self, &x](int y) {
+          caf::aout(self) << "cell #" << x.id() << " -> " << y << std::endl;
+        },
+        [&self, &x](caf::error& err) {
+          caf::aout(self) << "cell #" << x.id() << " -> "
+                          << self->system().render(err) << std::endl;
+        });
+  }
 }
 
 void caf_main(caf::actor_system& system) {
@@ -41,7 +75,7 @@ void caf_main(caf::actor_system& system) {
                std::cout << "Error: " << system.render(err) << '\n';
              });
 
-  auto cell = system.spawn(&cp::type_checked_cell);
+  auto cell = system.spawn(&cp::type_checked_cell, 0);
   auto cell_buddy = system.spawn(&typed_cell_buddy_actor_fun, cell);
 
   auto f = caf::make_function_view(system.spawn<cp::calculator_bhvr>());
@@ -52,6 +86,14 @@ void caf_main(caf::actor_system& system) {
     = caf::make_function_view(system.spawn<cp::dict_behavior>());
   dict_functor(caf::put_atom_v, "#1", "Hello CAF!");
   caf::aout(self) << "get: " << dict_functor(caf::get_atom_v, "#1");
+
+  std::vector<cp::cell> cells{};
+  for (int i{0}; i < 5; ++i) {
+    cells.push_back(system.spawn(&cp::type_checked_cell, i * i));
+  }
+  system.spawn(&waiting_testee, cells);     // LIFO order
+  system.spawn(&multiplexed_testee, cells); // arbitrary order
+  blocking_testee(self.ptr(), cells);       // FIFO order
 }
 
 struct foo {

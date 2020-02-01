@@ -2,7 +2,9 @@
 #include <caf/typed_event_based_actor.hpp> // caf::typed_event_based_actor
 
 namespace cp {
-cell::behavior_type type_checked_cell(cell::stateful_pointer<cell_state> self) {
+cell::behavior_type type_checked_cell(cell::stateful_pointer<cell_state> self,
+                                      int x0) {
+  self->state.value = x0;
   return {[self](caf::put_atom, int val) { self->state.value = val; },
           [self](caf::get_atom) { return self->state.value; }};
 }

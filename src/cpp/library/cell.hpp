@@ -10,6 +10,7 @@ struct cell_state {
   int value = 0;
 };
 
-cell::behavior_type type_checked_cell(cell::stateful_pointer<cell_state> self);
+cell::behavior_type type_checked_cell(cell::stateful_pointer<cell_state> self,
+                                      int x0);
 } // namespace cp
 #endif // INCG_CP_CELL_HPP
