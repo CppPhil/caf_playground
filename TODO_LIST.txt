@@ -1,4 +1,3 @@
-Read online documentation etc.
 See examples
 Do Praktikumsaufgabe
 Implement distributed chat application
