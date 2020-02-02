@@ -18,6 +18,10 @@ Using g++-9 or newer is recommended.
 g++-9 can be installed with apt-get using  
 `sudo apt-get install -y g++-9 g++-9-multilib libc6-dbg linux-libc-dev`  
 
+### OpenSSL
+CMake and CAF both require OpenSSL to be installed.  
+Using apt-get OpenSSL can be installed with `sudo apt-get install -y openssl libssl-dev`  
+
 ### CMake
 CMake 3.15 or newer is required.  
 CMake 3.16 or newer is recommended.  
