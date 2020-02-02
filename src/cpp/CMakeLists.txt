@@ -19,7 +19,7 @@ set(
     "library/custom_error_handler.hpp"
     "library/delegation.hpp"
     "library/response_promise.hpp"
-)
+    "library/aprintf.hpp")
 
 set(
     LIB_SOURCES

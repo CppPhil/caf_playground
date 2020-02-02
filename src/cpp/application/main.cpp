@@ -1,3 +1,4 @@
+#include <aprintf.hpp>
 #include <caf/all.hpp>
 #include <caf/io/all.hpp>
 #include <cell.hpp>
@@ -17,7 +18,7 @@ void typed_cell_buddy_actor_fun(caf::event_based_actor* self,
   self->request(buddy, caf::infinite, caf::put_atom{}, 55);
 
   self->request(buddy, caf::infinite, caf::get_atom{}).then([self](int result) {
-    caf::aout(self) << PL_CURRENT_FUNCTION << ": " << result << "\n";
+    cp::aprintf(self, "{}:{}\n", PL_CURRENT_FUNCTION, result);
   });
 }
 
@@ -29,36 +30,35 @@ void print_on_exit(const caf::actor& hdl, const std::string& name) {
   });
 }
 
-void waiting_testee(caf::event_based_actor* self, std::vector<cp::cell> cells) {
+void waiting_testee(caf::event_based_actor* self,
+                    const std::vector<cp::cell>& cells) {
   for (auto& x : cells) {
     self->request(x, std::chrono::seconds(1), caf::get_atom_v)
-      .await([self, x](int y) {
-        caf::aout(self) << "cell #" << x.id() << " -> " << y << std::endl;
-      });
+      .await(
+        [self, x](int y) { cp::aprintf(self, "cell #{} -> {}\n", x.id(), y); });
   }
 }
 
 void multiplexed_testee(caf::event_based_actor* self,
-                        std::vector<cp::cell> cells) {
+                        const std::vector<cp::cell>& cells) {
   for (auto& x : cells) {
     self->request(x, std::chrono::seconds(1), caf::get_atom_v)
       .then([self, x](int y) {
-        caf::aout(self) << "cell #" << x.id() << " -> " << y << std::endl;
+        cp::aprintf(self, "cell # {} -> {}\n", x.id(), y);
       });
   }
 }
 
-void blocking_testee(caf::blocking_actor* self, std::vector<cp::cell> cells) {
+void blocking_testee(caf::blocking_actor* self,
+                     const std::vector<cp::cell>& cells) {
   for (auto& x : cells) {
     self->request(x, std::chrono::seconds(1), caf::get_atom_v)
-      .receive(
-        [&self, &x](int y) {
-          caf::aout(self) << "cell #" << x.id() << " -> " << y << std::endl;
-        },
-        [&self, &x](caf::error& err) {
-          caf::aout(self) << "cell #" << x.id() << " -> "
-                          << self->system().render(err) << std::endl;
-        });
+      .receive([&self, &x](
+                 int y) { cp::aprintf(self, "cell #{} -> {}\n", x.id(), y); },
+               [&self, &x](caf::error& err) {
+                 cp::aprintf(self, "cell #{} -> {}\n", x.id(),
+                             self->system().render(err));
+               });
   }
 }
 
@@ -83,22 +83,22 @@ void caf_main(caf::actor_system& system, [[maybe_unused]] const config& cfg) {
   caf::scoped_actor self{system};
   self
     ->request(typed_calculator_actor, caf::infinite, caf::addition_atom{}, 1, 2)
-    .receive([](int z) { std::cout << "1+2=" << z << '\n'; },
-             [&system](caf::error& err) {
-               std::cout << "Error: " << system.render(err) << '\n';
+    .receive([self = self.ptr()](int z) { cp::aprintf(self, "1+2={}\n", z); },
+             [self = self.ptr(), &system](caf::error& err) {
+               cp::aprintf(self, "Error: {}\n", system.render(err));
              });
 
   auto cell = system.spawn(&cp::type_checked_cell, 0);
   auto cell_buddy = system.spawn(&typed_cell_buddy_actor_fun, cell);
 
   auto f = caf::make_function_view(system.spawn<cp::calculator_bhvr>());
-  caf::aout(self) << "10 + 20 = " << f(caf::add_atom_v, 10, 20) << "\n"
-                  << "7 * 9 = " << f(caf::mul_atom_v, 7, 9) << std::endl;
+  cp::aprintf(self, "10 + 20 = {}\n7 * 9 = {}\n", f(caf::add_atom_v, 10, 20),
+              f(caf::mul_atom_v, 7, 9));
 
   auto dict_functor
     = caf::make_function_view(system.spawn<cp::dict_behavior>());
   dict_functor(caf::put_atom_v, "#1", "Hello CAF!");
-  caf::aout(self) << "get: " << dict_functor(caf::get_atom_v, "#1");
+  cp::aprintf(self, "get {}\n", dict_functor(caf::get_atom_v, "#1"));
 
   // Cells example
   std::vector<cp::cell> cells{};
@@ -112,14 +112,12 @@ void caf_main(caf::actor_system& system, [[maybe_unused]] const config& cfg) {
   auto div = system.spawn(&cp::divider_impl);
   const double x{7.0}, y{0.0};
   self->request(div, std::chrono::seconds{10}, caf::div_atom_v, x, y)
-    .receive(
-      [&self, x, y](double z) {
-        caf::aout(self) << x << " / " << y << " = " << z << std::endl;
-      },
-      [&self, &system, x, y](const caf::error& err) {
-        caf::aout(self) << "*** cannot compute " << x << " / " << y << " => "
-                        << system.render(err) << std::endl;
-      });
+    .receive([&self, x,
+              y](double z) { cp::aprintf(self, "{} / {} = {}\n", x, y, z); },
+             [&self, &system, x, y](const caf::error& err) {
+               cp::aprintf(self, "*** cannot compute {} / {} => {}\n", x, y,
+                           system.render(err));
+             });
 
   // Delegation example
   cp::launch_delegation_example(system);

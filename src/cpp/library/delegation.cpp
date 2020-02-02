@@ -1,4 +1,5 @@
 #include "delegation.hpp"
+#include "aprintf.hpp"
 #include <caf/all.hpp>
 #include <caf/event_based_actor.hpp> // caf::event_based_actor
 #include <pl/current_function.hpp>   // PL_CURRENT_FUNCTION
@@ -9,8 +10,7 @@ using namespace std::chrono_literals;
 void actor_a(caf::event_based_actor* self, const calc& worker) {
   self->request(worker, 10s, caf::addition_atom_v, 1, 2)
     .then([self](int result) {
-      caf::aout(self) << PL_CURRENT_FUNCTION << ": 1 + 2 = " << result
-                      << std::endl;
+      aprintf(self, "{}: 1 + 2 = {}\n", PL_CURRENT_FUNCTION, result);
     });
 }
 

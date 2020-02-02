@@ -1,6 +1,5 @@
 #include "mirror.hpp"
-#include "file.hpp"
-#include <ostream>
+#include "aprintf.hpp"
 #include <pl/string_view.hpp>
 #include <string>
 
@@ -10,9 +9,7 @@ caf::behavior mirror(caf::event_based_actor* self) {
   return {// a handler for messages containing a single string
           // that replies with a string
           [=](const std::string& what) -> std::string {
-            // prints "Hello World!" via aout (thread-safe cout wrapper)
-            caf::aout(self) << what << std::endl;
-            cp::print(what.c_str());
+            aprintf(self, "{}\n", what);
 
             const pl::string_view sv{what};
 

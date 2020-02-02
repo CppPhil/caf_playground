@@ -1,4 +1,5 @@
 #include "response_promise.hpp"
+#include "aprintf.hpp"
 #include <caf/all.hpp>
 #include <caf/replies_to.hpp>              // caf::replies_to
 #include <caf/scoped_actor.hpp>            // caf::scoped_actor
@@ -33,12 +34,10 @@ void launch_response_promise_example(caf::actor_system& system) {
   caf::scoped_actor scoped_actor{system};
 
   scoped_actor->request(calc_actor, caf::infinite, caf::add_atom_v, 20, 99)
-    .receive(
-      [& self = scoped_actor](int result) {
-        caf::aout(self) << "Got: " << result << std::endl;
-      },
-      [& self = scoped_actor, &system](const caf::error& err) {
-        caf::aout(self) << "Got an error: " << system.render(err) << std::endl;
-      });
+    .receive([& self = scoped_actor](
+               int result) { aprintf(self, "Got: {}\n", result); },
+             [& self = scoped_actor, &system](const caf::error& err) {
+               aprintf(self, "Got an error: {}\n", system.render(err));
+             });
 }
 } // namespace cp

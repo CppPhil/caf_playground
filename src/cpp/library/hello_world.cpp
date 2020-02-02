@@ -1,6 +1,6 @@
 #include "hello_world.hpp"
+#include "aprintf.hpp"
 #include <chrono>
-#include <ostream>
 #include <string>
 
 namespace cp {
@@ -11,7 +11,7 @@ void hello_world(caf::event_based_actor* self, const caf::actor& buddy) {
       // ... wait up to 10s for a response ...
       [=](const std::string& what) {
         // ... and print it
-        caf::aout(self) << what << std::endl;
+        aprintf(self, "{}\n", what);
       });
 }
 } // namespace cp
