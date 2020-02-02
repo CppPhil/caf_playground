@@ -1,7 +1,7 @@
 #ifndef INCG_CP_HOSTNAME_HPP
 #define INCG_CP_HOSTNAME_HPP
-#include "optional.hpp" // tl::optional
-#include <string>       // std::string
+#include <string>          // std::string
+#include <tl/optional.hpp> // tl::optional
 
 namespace cp {
 [[nodiscard]] tl::optional<std::string> hostname();

@@ -24,7 +24,6 @@ set(
     "library/ping.hpp"
     "library/pong.hpp"
     "library/hostname.hpp"
-    "library/optional.hpp"
 )
 
 set(
@@ -62,12 +61,6 @@ target_link_libraries(
     cafPlaygroundLibrary
     PUBLIC
     fmt::fmt
-)
-
-target_link_libraries(
-    cafPlaygroundLibrary
-    PUBLIC
-    tl::optional
 )
 
 target_link_libraries(
@@ -122,6 +115,12 @@ target_include_directories(
     cafPlaygroundLibrary
     PUBLIC
     ${cafPlayground_SOURCE_DIR}/external/philslib/include
+)
+
+target_include_directories(
+    cafPlaygroundLibrary
+    PUBLIC
+    ${cafPlayground_SOURCE_DIR}/external/optional/include
 )
 
 ### APPLICATION

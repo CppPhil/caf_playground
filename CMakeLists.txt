@@ -24,7 +24,6 @@ endif()
 configure_file(src/cmake/version.hpp.in version.hpp @ONLY)
 
 add_subdirectory(external/fmtlib)
-add_subdirectory(external/optional)
 add_subdirectory(src/cpp)
 add_subdirectory(tests/cpp)
 
