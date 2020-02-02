@@ -19,7 +19,9 @@ set(
     "library/custom_error_handler.hpp"
     "library/delegation.hpp"
     "library/response_promise.hpp"
-    "library/aprintf.hpp")
+    "library/aprintf.hpp"
+    "library/custom_message_type.hpp"
+)
 
 set(
     LIB_SOURCES
@@ -33,6 +35,7 @@ set(
     "library/custom_error_handler.cpp"
     "library/delegation.cpp"
     "library/response_promise.cpp"
+    "library/custom_message_type.cpp"
 )
 
 add_library(

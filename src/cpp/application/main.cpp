@@ -4,6 +4,7 @@
 #include <cell.hpp>
 #include <composable_behavior.hpp>
 #include <custom_error_handler.hpp>
+#include <custom_message_type.hpp>
 #include <delegation.hpp>
 #include <dictionary.hpp>
 #include <file.hpp>
@@ -69,6 +70,7 @@ public:
       return to_string(static_cast<cp::math_error>(x));
     };
     add_error_category(caf::error_category<cp::math_error>::value, renderer);
+    add_message_type<cp::foo>("foo");
   }
 };
 
@@ -124,16 +126,9 @@ void caf_main(caf::actor_system& system, [[maybe_unused]] const config& cfg) {
 
   // Response promise example
   cp::launch_response_promise_example(system);
-}
 
-struct foo {
-  std::vector<int> a;
-  int b;
-};
-
-template <typename Inspector>
-typename Inspector::result_type inspect(Inspector& f, foo& x) {
-  return f(caf::meta::type_name("foo"), x.a, x.b);
+  // Custom message type example
+  cp::launch_custom_message_type_example(system);
 }
 
 // creates a main function for us that calls our caf_main
