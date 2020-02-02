@@ -1,4 +1,3 @@
-See examples
 Do Praktikumsaufgabe
 Implement distributed chat application
 
