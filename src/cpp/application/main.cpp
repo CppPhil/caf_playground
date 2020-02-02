@@ -9,6 +9,7 @@
 #include <dictionary.hpp>
 #include <file.hpp>
 #include <hello_world.hpp>
+#include <hostname.hpp>
 #include <mirror.hpp>
 #include <pl/algo/ranged_algorithms.hpp>
 #include <pl/current_function.hpp>
@@ -150,21 +151,24 @@ void caf_main(caf::actor_system& system, [[maybe_unused]] const config& cfg) {
               result);
 
   // node B
-  auto node = system.middleman().remote_actor("192.168.178.21", 4242);
-  if (not node) {
-    cp::aprintf(self, "unable to connect to node A: {}\n",
-                system.render(node.error()));
-  } else {
-    self->request(*node, caf::infinite, "HiTheRe")
-      .receive(
-        [self = self.ptr()](const std::string& result) {
-          cp::aprintf(self, "Got remote result: {}\n", result);
-        },
-        [self = self.ptr(), &system](const caf::error& err) {
-          cp::aprintf(self, "Couldn't get remove result: {}\n",
-                      system.render(err));
-        });
-  }
+  cp::hostname().map([&system, &self](const std::string& hostname) {
+    cp::aprintf(self, "hostname: {}\n", hostname);
+    auto node = system.middleman().remote_actor(hostname, 4242);
+    if (not node) {
+      cp::aprintf(self, "unable to connect to node A: {}\n",
+                  system.render(node.error()));
+    } else {
+      self->request(*node, caf::infinite, "HiTheRe")
+        .receive(
+          [self = self.ptr()](const std::string& result) {
+            cp::aprintf(self, "Got remote result: {}\n", result);
+          },
+          [self = self.ptr(), &system](const caf::error& err) {
+            cp::aprintf(self, "Couldn't get remove result: {}\n",
+                        system.render(err));
+          });
+    }
+  });
 }
 
 // creates a main function for us that calls our caf_main

@@ -23,6 +23,7 @@ set(
     "library/custom_message_type.hpp"
     "library/ping.hpp"
     "library/pong.hpp"
+    "library/hostname.hpp"
 )
 
 set(
@@ -40,6 +41,7 @@ set(
     "library/custom_message_type.cpp"
     "library/ping.cpp"
     "library/pong.cpp"
+    "library/hostname.cpp"
 )
 
 add_library(
@@ -59,6 +61,12 @@ target_link_libraries(
     cafPlaygroundLibrary
     PUBLIC
     fmt::fmt
+)
+
+target_link_libraries(
+    cafPlaygroundLibrary
+    PUBLIC
+    tl::optional
 )
 
 target_link_libraries(
