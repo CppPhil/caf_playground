@@ -1,6 +1,8 @@
 #include <aprintf.hpp>
 #include <caf/all.hpp>
 #include <caf/io/all.hpp>
+#include <caf/io/publish.hpp>
+#include <caf/io/remote_actor.hpp>
 #include <cell.hpp>
 #include <composable_behavior.hpp>
 #include <custom_error_handler.hpp>
@@ -156,20 +158,23 @@ void caf_main(caf::actor_system& system, [[maybe_unused]] const config& cfg) {
   cp::launch_custom_message_type_example(system);
 
   // node A
+  constexpr u16 port{4242};
   auto test_actor = system.spawn(test_actor_function);
-  const caf::expected<u16> result{system.middleman().publish(test_actor, 4242)};
+  const caf::expected<u16> result{caf::io::publish(test_actor, port)};
   cp::aprintf(self, "{}, {} result: {}\n", PL_CURRENT_FUNCTION, PL_SOURCE_LINE,
               result);
 
   // node B
   cp::hostname().map([&system, &self](const std::string& hostname) {
     cp::aprintf(self, "hostname: {}\n", hostname);
-    auto node = system.middleman().remote_actor(hostname, 4242);
-    if (not node) {
+    caf::expected<caf::actor> expected_node{
+      caf::io::remote_actor(system, hostname, port)};
+
+    if (not expected_node) {
       cp::aprintf(self, "unable to connect to node A: {}\n",
-                  system.render(node.error()));
+                  system.render(expected_node.error()));
     } else {
-      system.spawn(test_actor_buddy_function, *node);
+      system.spawn(test_actor_buddy_function, *expected_node);
     }
   });
 }
