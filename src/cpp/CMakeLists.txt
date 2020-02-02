@@ -21,6 +21,8 @@ set(
     "library/response_promise.hpp"
     "library/aprintf.hpp"
     "library/custom_message_type.hpp"
+    "library/ping.hpp"
+    "library/pong.hpp"
 )
 
 set(
@@ -36,6 +38,8 @@ set(
     "library/delegation.cpp"
     "library/response_promise.cpp"
     "library/custom_message_type.cpp"
+    "library/ping.cpp"
+    "library/pong.cpp"
 )
 
 add_library(

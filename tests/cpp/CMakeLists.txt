@@ -1,7 +1,8 @@
 set(
     TEST_SOURCES
     "test.cpp"
-    "test2.cpp" 
+    "test2.cpp"
+    "ping_pong_test.cpp"
 )
 
 add_executable(
