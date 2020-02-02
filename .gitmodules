@@ -10,3 +10,6 @@
 [submodule "external/clang-format"]
 	path = external/clang-format
 	url = https://github.com/CppPhil/clang-format.git
+[submodule "external/fmtlib"]
+	path = external/fmtlib
+	url = https://github.com/fmtlib/fmt.git

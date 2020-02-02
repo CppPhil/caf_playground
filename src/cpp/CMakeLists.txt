@@ -51,6 +51,12 @@ target_link_libraries(
 target_link_libraries(
     cafPlaygroundLibrary
     PUBLIC
+    fmt::fmt
+)
+
+target_link_libraries(
+    cafPlaygroundLibrary
+    PUBLIC
     ${CAF_CORE_LIB}
 )
 
