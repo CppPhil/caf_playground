@@ -1,6 +1,6 @@
 Read manual.pdf
- -> 10.3 System Error Codes
-
+ -> 17.3 Free Functions
+ 
 Read online documentation etc.
 See examples
 Do Praktikumsaufgabe
