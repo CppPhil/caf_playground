@@ -10,7 +10,9 @@
 #include <file.hpp>
 #include <hello_world.hpp>
 #include <mirror.hpp>
+#include <pl/algo/ranged_algorithms.hpp>
 #include <pl/current_function.hpp>
+#include <pl/source_line.hpp>
 #include <response_promise.hpp>
 #include <typed_calculator.hpp>
 
@@ -61,6 +63,17 @@ void blocking_testee(caf::blocking_actor* self,
                              self->system().render(err));
                });
   }
+}
+
+caf::behavior test_actor_function() {
+  return {[](std::string s) {
+    pl::algo::transform(s, s.begin(), [](char c) {
+      const unsigned char res{static_cast<unsigned char>(c)};
+      return res
+             & ~0b0010'0000U; // Uppercase it by turning the 3rd highest bit off
+    });
+    return s;
+  }};
 }
 
 class config : public caf::actor_system_config {
@@ -129,7 +142,30 @@ void caf_main(caf::actor_system& system, [[maybe_unused]] const config& cfg) {
 
   // Custom message type example
   cp::launch_custom_message_type_example(system);
+
+  // node A
+  auto test_actor = system.spawn(test_actor_function);
+  const caf::expected<u16> result{system.middleman().publish(test_actor, 4242)};
+  cp::aprintf(self, "{}, {} result: {}\n", PL_CURRENT_FUNCTION, PL_SOURCE_LINE,
+              result);
+
+  // node B
+  auto node = system.middleman().remote_actor("192.168.178.21", 4242);
+  if (not node) {
+    cp::aprintf(self, "unable to connect to node A: {}\n",
+                system.render(node.error()));
+  } else {
+    self->request(*node, caf::infinite, "HiTheRe")
+      .receive(
+        [self = self.ptr()](const std::string& result) {
+          cp::aprintf(self, "Got remote result: {}\n", result);
+        },
+        [self = self.ptr(), &system](const caf::error& err) {
+          cp::aprintf(self, "Couldn't get remove result: {}\n",
+                      system.render(err));
+        });
+  }
 }
 
 // creates a main function for us that calls our caf_main
-CAF_MAIN()
+CAF_MAIN(caf::io::middleman)
