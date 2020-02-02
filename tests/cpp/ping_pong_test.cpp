@@ -7,7 +7,7 @@
 
 namespace {
 struct ping_pong_fixture : test_coordinator_fixture<> {
-  caf::actor pong_actor;
+  cp::pong_actor pong_actor;
 
   ping_pong_fixture() {
     // Spawn the Pong actor.
