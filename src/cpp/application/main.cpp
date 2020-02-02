@@ -77,6 +77,17 @@ caf::behavior test_actor_function() {
   }};
 }
 
+void test_actor_buddy_function(caf::event_based_actor* self,
+                               const caf::actor& buddy) {
+  using namespace std::string_literals;
+  self->request(buddy, caf::infinite, "HiTheRe"s)
+    .then([self](const std::string& result_string) {
+      cp::aprintf(self,
+                  "test_actor_buddy_function: Got \"{}\" from remote actor\n",
+                  result_string);
+    });
+}
+
 class config : public caf::actor_system_config {
 public:
   config() {
@@ -158,15 +169,7 @@ void caf_main(caf::actor_system& system, [[maybe_unused]] const config& cfg) {
       cp::aprintf(self, "unable to connect to node A: {}\n",
                   system.render(node.error()));
     } else {
-      self->request(*node, caf::infinite, "HiTheRe")
-        .receive(
-          [self = self.ptr()](const std::string& result) {
-            cp::aprintf(self, "Got remote result: {}\n", result);
-          },
-          [self = self.ptr(), &system](const caf::error& err) {
-            cp::aprintf(self, "Couldn't get remove result: {}\n",
-                        system.render(err));
-          });
+      system.spawn(test_actor_buddy_function, *node);
     }
   });
 }
