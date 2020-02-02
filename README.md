@@ -73,3 +73,6 @@ For instance one can build the project in release mode forcing a rebuild using `
 
 ## Generating the documentation
 Documentation can be generated using `doxygen Doxyfile` (requires doxygen).  
+
+## Project structure
+The project attempts to follow the [Pitchfork Layout](https://api.csswg.org/bikeshed/?force=1&url=https://raw.githubusercontent.com/vector-of-bool/pitchfork/develop/data/spec.bs)  
