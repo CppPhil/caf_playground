@@ -48,6 +48,7 @@ Ruby can be installed with apt-get using:
 ## Setup
 To set up the project CAF needs to be installed.  
 To install CAF the install_caf.sh script can be invoked using `./install_caf.sh`  
+The process might query for your password because it uses `sudo make install` to install CAF on the system.  
 
 ## Scripts
 The root directory contains multiple bash scripts which are described below.  
