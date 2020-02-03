@@ -1,9 +1,6 @@
 [submodule "external/goto-ruby"]
 	path = external/goto-ruby
 	url = https://github.com/CppPhil/goto-ruby.git
-[submodule "external/libcaf"]
-	path = external/libcaf
-	url = https://github.com/actor-framework/actor-framework.git
 [submodule "external/philslib"]
 	path = external/philslib
 	url = https://github.com/CppPhil/philslib.git
