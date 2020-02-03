@@ -39,7 +39,7 @@ void print_on_exit(const caf::actor& hdl, const std::string& name) {
 void waiting_testee(caf::event_based_actor* self,
                     const std::vector<cp::cell>& cells) {
   for (auto& x : cells) {
-    self->request(x, std::chrono::seconds(1), caf::get_atom_v)
+    self->request(x, std::chrono::seconds(1), caf::get_atom::value)
       .await(
         [self, x](int y) { cp::aprintf(self, "cell #{} -> {}\n", x.id(), y); });
   }
@@ -48,7 +48,7 @@ void waiting_testee(caf::event_based_actor* self,
 void multiplexed_testee(caf::event_based_actor* self,
                         const std::vector<cp::cell>& cells) {
   for (auto& x : cells) {
-    self->request(x, std::chrono::seconds(1), caf::get_atom_v)
+    self->request(x, std::chrono::seconds(1), caf::get_atom::value)
       .then([self, x](int y) {
         cp::aprintf(self, "cell # {} -> {}\n", x.id(), y);
       });
@@ -58,7 +58,7 @@ void multiplexed_testee(caf::event_based_actor* self,
 void blocking_testee(caf::blocking_actor* self,
                      const std::vector<cp::cell>& cells) {
   for (auto& x : cells) {
-    self->request(x, std::chrono::seconds(1), caf::get_atom_v)
+    self->request(x, std::chrono::seconds(1), caf::get_atom::value)
       .receive([&self, &x](
                  int y) { cp::aprintf(self, "cell #{} -> {}\n", x.id(), y); },
                [&self, &x](caf::error& err) {
@@ -93,10 +93,10 @@ void test_actor_buddy_function(caf::event_based_actor* self,
 class config : public caf::actor_system_config {
 public:
   config() {
-    auto renderer = [](uint8_t x, const caf::message&) {
-      return to_string(static_cast<cp::math_error>(x));
-    };
-    add_error_category(caf::error_category<cp::math_error>::value, renderer);
+    /*
+      add_error_category<cp::math_error>(
+      caf::error_category<cp::math_error>::value);
+    */
     add_message_type<cp::foo>("foo");
   }
 };
@@ -121,13 +121,14 @@ void caf_main(caf::actor_system& system, [[maybe_unused]] const config& cfg) {
   auto cell_buddy = system.spawn(&typed_cell_buddy_actor_fun, cell);
 
   auto f = caf::make_function_view(system.spawn<cp::calculator_bhvr>());
-  cp::aprintf(self, "10 + 20 = {}\n7 * 9 = {}\n", f(caf::add_atom_v, 10, 20),
-              f(caf::mul_atom_v, 7, 9));
+  cp::aprintf(self, "10 + 20 = {}\n7 * 9 = {}\n",
+              f(caf::add_atom::value, 10, 20),
+              f(caf::multiplication_atom::value, 7, 9));
 
-  auto dict_functor
-    = caf::make_function_view(system.spawn<cp::dict_behavior>());
-  dict_functor(caf::put_atom_v, "#1", "Hello CAF!");
-  cp::aprintf(self, "get {}\n", dict_functor(caf::get_atom_v, "#1"));
+  auto dict_functor = caf::make_function_view(
+    system.spawn<cp::dict_behavior>());
+  dict_functor(caf::put_atom::value, "#1", "Hello CAF!");
+  cp::aprintf(self, "get {}\n", dict_functor(caf::get_atom::value, "#1"));
 
   // Cells example
   std::vector<cp::cell> cells{};
@@ -140,7 +141,7 @@ void caf_main(caf::actor_system& system, [[maybe_unused]] const config& cfg) {
 
   auto div = system.spawn(&cp::divider_impl);
   const double x{7.0}, y{0.0};
-  self->request(div, std::chrono::seconds{10}, caf::div_atom_v, x, y)
+  self->request(div, std::chrono::seconds{10}, caf::division_atom::value, x, y)
     .receive([&self, x,
               y](double z) { cp::aprintf(self, "{} / {} = {}\n", x, y, z); },
              [&self, &system, x, y](const caf::error& err) {

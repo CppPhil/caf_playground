@@ -5,10 +5,10 @@
 #include <caf/typed_event_based_actor.hpp> // caf::typed_event_based_actor
 
 namespace caf {
-CAF_MSG_TYPE_ADD_ATOM(addition_atom);
-CAF_MSG_TYPE_ADD_ATOM(subtraction_atom);
-CAF_MSG_TYPE_ADD_ATOM(multiplication_atom);
-CAF_MSG_TYPE_ADD_ATOM(division_atom);
+using addition_atom = atom_constant<atom("addition")>;
+using subtraction_atom = atom_constant<atom("minus")>;
+using multiplication_atom = atom_constant<atom("multiply")>;
+using division_atom = atom_constant<atom("division")>;
 } // namespace caf
 
 namespace cp {
@@ -22,7 +22,7 @@ class typed_calculator : public calculator_actor::base {
 public:
   using base_type = calculator_actor::base;
 
-  typed_calculator(caf::actor_config& cfg) : base_type{cfg} {
+  explicit typed_calculator(caf::actor_config& cfg) : base_type{cfg} {
   }
 
   behavior_type make_behavior() override {

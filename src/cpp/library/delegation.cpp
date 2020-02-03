@@ -8,7 +8,7 @@ namespace cp {
 using namespace std::chrono_literals;
 
 void actor_a(caf::event_based_actor* self, const calc& worker) {
-  self->request(worker, 10s, caf::addition_atom_v, 1, 2)
+  self->request(worker, 10s, caf::addition_atom::value, 1, 2)
     .then([self](int result) {
       aprintf(self, "{}: 1 + 2 = {}\n", PL_CURRENT_FUNCTION, result);
     });

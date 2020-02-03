@@ -24,6 +24,7 @@ set(
     "library/ping.hpp"
     "library/pong.hpp"
     "library/hostname.hpp"
+    "library/ping_pong_atoms.hpp"
 )
 
 set(

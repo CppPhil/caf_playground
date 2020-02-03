@@ -6,13 +6,13 @@
 #include <pl/algo/ranged_algorithms.hpp> // pl::algo::transform
 
 namespace caf {
-CAF_MSG_TYPE_ADD_ATOM(process_atom);
+using process_atom = atom_constant<atom("process")>;
 } // namespace caf
 
 namespace cp {
 namespace {
-using actor1
-  = caf::typed_actor<caf::replies_to<caf::process_atom, foo>::with<foo>>;
+using actor1 = caf::typed_actor<
+  caf::replies_to<caf::process_atom, foo>::with<foo>>;
 
 actor1::behavior_type first_actor() {
   return {[](caf::process_atom, foo foo) {
@@ -26,7 +26,7 @@ actor1::behavior_type first_actor() {
 
 void buddy(caf::event_based_actor* self, const actor1& actor_1) {
   self
-    ->request(actor_1, caf::infinite, caf::process_atom_v,
+    ->request(actor_1, caf::infinite, caf::process_atom::value,
               foo{{1, 2, 3, 4, 5}, 3})
     .then([self](const foo& result) {
       cp::aprintf(self, "custom_message_type_result: {}\n", result);

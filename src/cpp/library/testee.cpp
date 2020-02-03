@@ -10,12 +10,12 @@ behavior testee(stateful_actor<testee_state, raw_event_based_actor>* self,
     [=](ok_atom) {
       auto n = t->now() + 10s;
       self->state.timeout_id += 1;
-      t->set_ordinary_timeout(n, self, "", self->state.timeout_id);
+      t->set_ordinary_timeout(n, self, ok_atom::value, self->state.timeout_id);
     },
     [=](add_atom) {
       auto n = t->now() + 10s;
       self->state.timeout_id += 1;
-      t->set_multi_timeout(n, self, "", self->state.timeout_id);
+      t->set_multi_timeout(n, self, ok_atom::value, self->state.timeout_id);
     },
     [=](put_atom) {
       auto n = t->now() + 10s;

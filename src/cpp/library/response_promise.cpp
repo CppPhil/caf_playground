@@ -8,8 +8,8 @@
 
 namespace cp {
 namespace {
-using adder
-  = caf::typed_actor<caf::replies_to<caf::add_atom, int, int>::with<int>>;
+using adder = caf::typed_actor<
+  caf::replies_to<caf::add_atom, int, int>::with<int>>;
 
 // function-based, statically typed, event-based API
 adder::behavior_type worker() {
@@ -33,7 +33,7 @@ void launch_response_promise_example(caf::actor_system& system) {
 
   caf::scoped_actor scoped_actor{system};
 
-  scoped_actor->request(calc_actor, caf::infinite, caf::add_atom_v, 20, 99)
+  scoped_actor->request(calc_actor, caf::infinite, caf::add_atom::value, 20, 99)
     .receive([& self = scoped_actor](
                int result) { aprintf(self, "Got: {}\n", result); },
              [& self = scoped_actor, &system](const caf::error& err) {

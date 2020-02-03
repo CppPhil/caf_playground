@@ -12,9 +12,10 @@ std::string to_string(math_error x) {
 }
 
 divider::behavior_type divider_impl() {
-  return {[](caf::div_atom, double x, double y) -> caf::result<double> {
+  return {[](caf::division_atom, double x, double y) -> caf::result<double> {
     if (std::fpclassify(y) == FP_ZERO) {
-      return caf::error(math_error::division_by_zero);
+      return caf::error(static_cast<u8>(math_error::division_by_zero),
+                        caf::sys_atom::value);
     }
     return x / y;
   }};

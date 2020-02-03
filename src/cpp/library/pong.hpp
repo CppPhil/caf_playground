@@ -1,5 +1,6 @@
 #ifndef INCG_CP_PONG_HPP
 #define INCG_CP_PONG_HPP
+#include "ping_pong_atoms.hpp"
 #include <caf/behavior.hpp>
 #include <caf/typed_actor.hpp>
 

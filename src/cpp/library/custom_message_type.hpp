@@ -55,8 +55,9 @@ private:
     const auto secondLast = std::prev(last);
 
     std::copy(it, secondLast,
-              std::ostream_iterator<pl::meta::remove_cvref_t<decltype(*it)>>{
-                oss, delimiter.data()});
+              std::ostream_iterator<
+                pl::meta::remove_cvref_t<decltype(*it)>>{oss,
+                                                         delimiter.data()});
     oss << *secondLast;
 
     return oss.str();

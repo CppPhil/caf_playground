@@ -1,6 +1,7 @@
 #ifndef INCG_CP_CUSTOM_ERROR_HANDLER_HPP
 #define INCG_CP_CUSTOM_ERROR_HANDLER_HPP
-#include "int_types.hpp"          // u8
+#include "int_types.hpp" // u8
+#include "typed_calculator.hpp"
 #include <caf/error_category.hpp> // caf::error_category
 #include <caf/typed_actor.hpp>    // caf::typed_actor
 
@@ -13,7 +14,7 @@ enum class math_error : u8 { division_by_zero = 1 };
 std::string to_string(math_error x);
 
 using divider = caf::typed_actor<
-  caf::replies_to<caf::div_atom, double, double>::with<double>>;
+  caf::replies_to<caf::division_atom, double, double>::with<double>>;
 
 divider::behavior_type divider_impl();
 } // namespace cp
@@ -24,7 +25,10 @@ divider::behavior_type divider_impl();
 namespace caf {
 template <>
 struct error_category<::cp::math_error> {
-  static constexpr u8 value{101};
+  // static constexpr u8 u8_value{101};
+  using type = atom_constant<atom("math_error")>;
+
+  static constexpr atom_value value{type::uint_value()};
 };
 } // namespace caf
 #endif // INCG_CP_CUSTOM_ERROR_HANDLER_HPP

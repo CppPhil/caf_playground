@@ -4,8 +4,8 @@
 namespace cp {
 [[nodiscard]] tl::optional<std::string> hostname() {
   const std::vector<std::string> addresses{
-    caf::io::network::interfaces::list_addresses(
-      caf::io::network::protocol::ipv4, false)};
+    caf::io::network::interfaces::
+      list_addresses(caf::io::network::protocol::ipv4, false)};
 
   if (addresses.empty()) {
     return tl::nullopt;
