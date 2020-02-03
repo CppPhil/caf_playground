@@ -351,3 +351,6 @@ docs
 # CLion project files
 .idea
 
+# libcaf
+external/libcaf
+

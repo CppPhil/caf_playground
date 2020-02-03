@@ -7,6 +7,12 @@ readonly CAF_DIR=$DIR/external/libcaf
 
 readonly PREVIOUS_DIRECTORY=${pwd}
 
+cd $DIR/external
+wget https://github.com/actor-framework/actor-framework/archive/0.17.3.tar.gz
+tar xf 0.17.3.tar.gz
+mv ./actor-framework-0.17.3 ./libcaf
+rm 0.17.3.tar.gz
+
 cd $CAF_DIR
 
 ./configure --libs-only --with-gcc=g++
